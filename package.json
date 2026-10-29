@@ -1,0 +1,34 @@
+{
+  "name": "koboenhance",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Bulk project management for KoboToolbox — Manifest V3 browser extension.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omar-devlop/koboenhance.git"
+  },
+  "homepage": "https://github.com/omar-devlop/koboenhance#readme",
+  "bugs": {
+    "url": "https://github.com/omar-devlop/koboenhance/issues"
+  },
+  "keywords": [
+    "kobotoolbox",
+    "chrome-extension",
+    "manifest-v3",
+    "bulk-actions"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package": "npm run build && node tools/package.mjs",
+    "check": "npm run typecheck && npm run package"
+  },
+  "devDependencies": {
+    "archiver": "8.0.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

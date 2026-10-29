@@ -1,0 +1,15 @@
+# Dependencies and build output — never committed.
+node_modules/
+dist/
+
+# Logs from local build/package runs.
+*.log
+
+# CSV exports of a real KoboToolbox account must never be committed.
+*.csv
+
+# Editor / OS noise.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

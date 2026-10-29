@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Type-checks, rebuilds the .js files the manifest loads, and refuses to
+      # produce a zip if the manifest and package.json disagree.
+      - run: npm run check
+
+      # The compiled .js files are committed so the repo can be loaded unpacked
+      # directly. Fail if a source change was not followed by a rebuild.
+      - name: Verify committed build output is current
+        run: git diff --exit-code
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: KoboEnhance-package
+          path: dist/KoboEnhance-*.zip
+          if-no-files-found: error

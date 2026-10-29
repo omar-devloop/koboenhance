@@ -1,0 +1,6 @@
+# Normalize text files so the committed .js build output matches what `tsc`
+# emits on any OS (this keeps the CI "build output is up to date" check honest).
+* text=auto eol=lf
+
+*.png binary
+*.zip binary

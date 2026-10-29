@@ -1,0 +1,106 @@
+{
+  "manifest_version": 3,
+  "name": "KoboEnhance",
+  "version": "1.0.0",
+  "description": "Bulk project management for KoboToolbox: permissions, metadata, tags and notes, CSV reports, and copying projects across accounts.",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://eu.kobotoolbox.org/*",
+    "https://kf.kobotoolbox.org/*",
+    "https://kc-eu.kobotoolbox.org/*",
+    "https://kc.kobotoolbox.org/*"
+  ],
+  "action": {
+    "default_title": "KoboEnhance",
+    "default_popup": "popup/about.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "core/transfer/transport.sw.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://eu.kobotoolbox.org/*",
+        "https://kf.kobotoolbox.org/*"
+      ],
+      "js": ["entry/inject.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://eu.kobotoolbox.org/*",
+        "https://kf.kobotoolbox.org/*"
+      ],
+      "js": [
+        "core/state/store.js",
+        "core/errors/errors.js",
+        "core/errors/guard.js",
+        "core/dom/dom.js",
+        "core/i18n/i18n.js",
+        "core/i18n/locales/en.js",
+        "core/i18n/locales/fr.js",
+        "core/i18n/locales/ar.js",
+        "core/auth/auth.service.js",
+        "core/api/client.js",
+        "core/api/pagination.js",
+        "core/api/assets.api.js",
+        "core/api/permissions.api.js",
+        "core/api/users.api.js",
+        "core/api/environment.api.js",
+        "core/transfer/transport.js",
+        "core/transfer/state.backend.js",
+        "core/transfer/destination.store.js",
+        "core/transfer/source.account.js",
+        "core/transfer/mapping.store.js",
+        "core/transfer/source.api.js",
+        "core/transfer/usage.api.js",
+        "core/transfer/dest.api.js",
+        "core/transfer/submission.xml.js",
+        "core/scraper/scraper.service.js",
+        "core/export/export.service.js",
+        "core/collections/surveys.js",
+        "core/scope/scope.service.js",
+        "core/templates.store.js",
+        "core/actions/action-interface.js",
+        "core/actions/action-registry.js",
+        "ui/components.js",
+        "core/execution/action.executor.js",
+        "features/history/history.store.js",
+        "features/history/history.panel.js",
+        "features/paused-run/paused-run.store.js",
+        "features/bulk-actions/actions.integrated.controller.js",
+        "features/bulk-actions/actions/archive.unarchive.js",
+        "features/bulk-actions/actions/share.remove.js",
+        "features/bulk-actions/actions/permission.copy.js",
+        "features/bulk-actions/actions/permission.template.js",
+        "features/bulk-actions/actions/anonymous.submissions.js",
+        "features/bulk-actions/actions/name.actions.js",
+        "features/bulk-actions/actions/description.actions.js",
+        "features/bulk-actions/actions/country.sector.actions.js",
+        "features/bulk-actions/actions/tags.actions.js",
+        "features/transfer/transfer.pipeline.js",
+        "features/transfer/transfer.preflight.js",
+        "features/transfer/transfer.action.js",
+        "features/permissions/shared.search.js",
+        "features/permissions/permission.audit.js",
+        "features/reports/export.projects.js",
+        "features/reports/country.portfolio.js",
+        "features/tags/tags.column.js",
+        "features/tags/form.summary.tags.js",
+        "features/notes/form.summary.notes.js",
+        "features/collect/collect.panel.js",
+        "features/transfer/transfer.panel.js",
+        "ui/integration.js",
+        "entry/main.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

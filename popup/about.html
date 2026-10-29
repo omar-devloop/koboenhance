@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>KoboEnhance</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        width: 340px;
+        font: 13px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+        color: #1f2328;
+        background: #fff;
+        -webkit-font-smoothing: antialiased;
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 18px 14px;
+      }
+      .head img { width: 42px; height: 42px; border-radius: 10px; }
+      .name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #111;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .version {
+        font-size: 11px;
+        font-weight: 500;
+        color: #6b7280;
+        background: #f1f3f5;
+        border: 1px solid #eceef1;
+        border-radius: 999px;
+        padding: 1px 8px;
+      }
+      .desc {
+        padding: 0 18px 16px;
+        color: #57606a;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        border-top: 1px solid #f0f1f3;
+      }
+      .status {
+        flex: 1;
+        font-size: 12px;
+        color: #6b7280;
+      }
+      .row button {
+        appearance: none;
+        border: 0;
+        border-radius: 8px;
+        background: #eef4fb;
+        color: #0069b3;
+        padding: 6px 12px;
+        font: 600 12px "Segoe UI", system-ui, sans-serif;
+        cursor: pointer;
+      }
+      .row button:hover { background: #e2edf9; }
+      .row button:disabled { opacity: 0.4; cursor: default; }
+      .row button.primary { background: #0086d6; color: #fff; }
+      .row button.primary:hover:not(:disabled) { background: #0077bf; }
+      .foot {
+        padding: 12px 18px 16px;
+        font-size: 11px;
+        color: #9aa1aa;
+        border-top: 1px solid #f0f1f3;
+      }
+      .foot code {
+        font: 11px ui-monospace, Consolas, monospace;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <img src="../icons/icon48.png" alt="KoboEnhance" />
+      <div>
+        <div class="name">KoboEnhance<span class="version" id="version">…</span></div>
+      </div>
+    </div>
+
+    <!-- Filled from the manifest by about.js, so it always matches the install. -->
+    <p class="desc" id="description"></p>
+
+    <div class="row">
+      <span class="status" id="diag-status">Checking…</span>
+      <button class="primary" id="diag-copy" type="button" disabled>Copy diagnostics</button>
+      <button id="diag-clear" type="button" disabled>Clear</button>
+    </div>
+
+    <div class="foot">
+      Active on <code>eu.kobotoolbox.org</code> · <code>kf.kobotoolbox.org</code><br />
+      Independent tool, not affiliated with KoboToolbox.
+    </div>
+
+    <!-- External, not inline: extension pages run under the default MV3 CSP
+         (script-src 'self'), which refuses inline scripts. -->
+    <script src="about.js"></script>
+  </body>
+</html>
