@@ -406,9 +406,17 @@
     const target = document.body || document.documentElement;
     const obs = new MutationObserver(schedule);
     obs.observe(target, { childList: true, subtree: true });
-    setInterval(() => {
+    const poller = setInterval(() => {
       if (findActionsRoot()) refresh();
     }, 2000);
+    window.addEventListener(
+      "pagehide",
+      () => {
+        clearInterval(poller);
+        obs.disconnect();
+      },
+      { once: true }
+    );
   }
 
   function refresh(): void {

@@ -27,8 +27,7 @@
  * THE REWRITE
  * A submission belongs to the project it was collected for, so a source
  * submission cannot be posted to a destination project unchanged. Four things
- * are rewritten, matching the reference tool (C:\src\kobo-transfer\transfer\
- * xml.py:35-69):
+ * are rewritten, matching the reference tool (transfer/xml.py:35-69):
  *
  *   root tag    source UID  ->  destination UID
  *   id=""       source UID  ->  destination UID
@@ -235,7 +234,7 @@
       }
     }
     // The two version fields are NOT interchangeable, and an earlier revision had
-    // them the wrong way round. The reference (C:\src\kobo-transfer\transfer\xml.py:18-23,
+    // them the wrong way round. The reference (transfer\xml.py:18-23,
     // applied at :141-153) builds:
     //
     //     data = { 'version': f'{count} ({date})',   # the LABEL
@@ -263,7 +262,7 @@
     // is what a fresh copy of that record is.
     //
     // A deliberate deviation from the reference, which leaves the element in
-    // place (C:\src\kobo-transfer\transfer\xml.py:119-173 touches only the root
+    // place (transfer/xml.py:119-173 touches only the root
     // tag/attributes, __version__ and formhub/uuid). The reference does not move
     // a project's submissions into a NEW project, so it never hits this.
     const meta = findDirect(replacement, "meta");

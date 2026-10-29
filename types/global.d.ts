@@ -9,8 +9,6 @@
 
 interface Window {
   KoboEnhance: KoboEnhanceGlobal;
-  /** Username captured by the MAIN-world inject script (entry/inject.js). */
-  __ke_username?: string | null;
 }
 
 /** Page-level context the in-page integration keeps (core/state/store.js). */

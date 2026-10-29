@@ -55,7 +55,7 @@
   }
 
   window.addEventListener("message", function (e) {
-    if (e.source !== window) return;
+    if (e.source !== window || e.origin !== window.location.origin) return;
     const d = e.data as KoboRecord | null;
     if (!d) return;
     if (d.channel === "__koboenhance__" && d.type === "username" && d.source === "me" && isValidUsername(d.username)) {
@@ -172,11 +172,6 @@
 
   async function getUsername(): Promise<string> {
     if (cachedUsername !== null) return cachedUsername;
-    const injected = window.__ke_username || "";
-    if (isValidUsername(injected)) {
-      cachedUsername = injected;
-      return cachedUsername;
-    }
     // Resolve quickly (cache/DOM/inject sources first); never block the caller
     // on the slow network path for more than ~1.5s.
     const budget: Promise<string> = new Promise((resolve) => setTimeout(() => resolve(""), 1500));

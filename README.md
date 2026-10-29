@@ -583,7 +583,10 @@ export of a real account must never ship, so `.csv` is refused outright (and
 4. Tick projects (or pick UIDs / entire account), choose an action, Run.
 
 Other KoboToolbox instances: add the host to `host_permissions` and the
-content-script `matches` in `manifest.json`.
+content-script `matches` in `manifest.json`; the in-page actions then work. The
+**cross-account copy** is intentionally limited to the Global and EU servers:
+add the host to `ALLOWED_HOSTS` (`core/transfer/transport.sw.ts`) and the
+`SERVERS` list (`core/transfer/destination.store.ts`) to allow it there too.
 
 ## Status
 

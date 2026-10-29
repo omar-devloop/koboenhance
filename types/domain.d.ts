@@ -1,5 +1,5 @@
-﻿/**
- * types/domain.d.ts â€” the KoboEnhance domain model.
+/**
+ * types/domain.d.ts — the KoboEnhance domain model.
  *
  * Global (ambient) declarations usable by every extension script without any
  * import, because the extension ships as classic content scripts attached to

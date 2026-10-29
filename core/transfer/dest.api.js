@@ -8,7 +8,7 @@
  * is bound to the signed-in SOURCE account.
  *
  * The endpoint shapes are the ones the Python reference tool uses
- * (C:\src\kobo-transfer\transfer\asset.py and helpers/config.py:82-100), which
+ * (transfer/asset.py and helpers/config.py:82-100), which
  * is the only documented way Kobo's v2 API accepts a project copy:
  *
  *   1. POST  /api/v2/assets/?format=json         create an empty survey project
@@ -130,7 +130,7 @@
      * The value is passed through and JSON-encoded EXACTLY ONCE, right here. That
      * single encode is what the API expects and it is what the reference tool does
      * with `json={"content": json.dumps(asset_content)}`
-     * (C:\src\kobo-transfer\transfer\asset.py:66). Encoding the value anywhere
+     * (transfer/asset.py:66). Encoding the value anywhere
      * earlier, or encoding a value that is already a JSON string, produces a
      * doubly-encoded body — which Kobo accepts without complaint and which yields a
      * project whose form is empty, reported as "The survey sheet is either empty or
@@ -141,7 +141,7 @@
      * conversion happens here.
      */
     async function setVersionContent(ctx, destUid, content, signal) {
-        // Reference-faithful, single write (C:\src\kobo-transfer\transfer\asset.py:61-69):
+        // Reference-faithful, single write (transfer/asset.py:61-69):
         //
         //     PATCH {asset_url} ?format=json  {"content": json.dumps(content)}
         //     version_id = res.json()["version_id"]

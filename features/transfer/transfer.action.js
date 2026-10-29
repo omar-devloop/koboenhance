@@ -363,7 +363,7 @@
         /**
          * Copies one project. Throwing marks the row failed and lets the executor
          * move on to the next project; returning marks it handled. Nothing here is
-         * read-only any more â€” this creates real projects on the destination.
+         * read-only any more — this creates real projects on the destination.
          */
         async execute(ctx) {
             const c = ctx;
@@ -496,7 +496,7 @@
                 result.submissionsDuplicate = submissionCounts.submissionsDuplicate;
                 result.submissionsFailed = submissionCounts.submissionsFailed;
                 // The failure REASONS have to be carried across too. They were not, and
-                // the omission made `Submissions_Rejected` permanently empty â€” so a run in
+                // the omission made `Submissions_Rejected` permanently empty — so a run in
                 // which every submission on a project failed reported "0 could not be
                 // copied" with no explanation at all, which is the one situation where the
                 // explanation matters most.

@@ -21,7 +21,7 @@
  *     deployed_versions: { count, results: [ { uid, url, version_key, ... } ] },
  *     files: [ { content: "<download url>", metadata: { filename, mimetype } } ] }
  *
- * This matches the reference tool (C:\src\kobo-transfer\transfer\asset.py:6-29)
+ * This matches the reference tool (transfer\asset.py:6-29)
  * and avoids two extra round-trips per project. Two field names are easy to get
  * wrong and are therefore read only here: a media file's download URL is
  * `content`, not `url`, and its filename/mimetype live under `metadata`.
@@ -103,7 +103,7 @@
      * The project detail payload.
      *
      * Uses the `.json` suffix form, matching the reference tool
-     * (C:\src\kobo-transfer\helpers\config.py:91 builds `asset_url_json` as
+     * (helpers/config.py:91 builds `asset_url_json` as
      * `{asset_url}.json`). This is not cosmetic: the trailing-slash form
      * `/api/v2/assets/{uid}/` can answer with a trimmed representation, and a
      * trimmed `deployed_versions` entry is how a transfer ends up replaying the
@@ -186,7 +186,7 @@
      * The value is NOT interpreted. Kobo serves a form either as XForm XML (older
      * projects) or as a structured definition — an object with `schema`, `survey`,
      * `choices`, `settings`, `translated`, `transitions`
-     * (C:\src\kobo-transfer\transfer\asset.py:59 does `res.json()['content']` and
+     * (transfer/asset.py:59 does `res.json()['content']` and
      * never checks which). Both are written to the destination unchanged, so
      * requiring a string here is what made every form-builder project fail with
      * "A source form version had no content".

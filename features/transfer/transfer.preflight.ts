@@ -1,4 +1,4 @@
-﻿/**
+/**
  * features/transfer/transfer.preflight.ts — what is about to be copied, and
  * whether the destination can take it.
  *

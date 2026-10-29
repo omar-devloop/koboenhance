@@ -363,7 +363,7 @@
         }
     }
     window.addEventListener("message", (event) => {
-        if (event.source !== window)
+        if (event.source !== window || event.origin !== window.location.origin)
             return;
         const d = event.data;
         if (d && d.channel === "__koboenhance__" && d.type === "asset-detail") {

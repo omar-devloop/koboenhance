@@ -1,6 +1,6 @@
 "use strict";
 /**
- * core/execution/action.executor.ts â€” EXECUTION concept: "how an action runs".
+ * core/execution/action.executor.ts — EXECUTION concept: "how an action runs".
  *
  * The executor owns everything that is NOT business logic:
  *   - resolving the scope (explicit UIDs or entire account),
@@ -27,7 +27,7 @@
  *              stage -> def.report.summary(result)
  *
  * Everything the toolbar needs to render afterwards is packaged into the
- * finished payload and, when relevant, `finished.ui` â€” a
+ * finished payload and, when relevant, `finished.ui` — a
  * { dialog } | { type,title,description?,metrics?,files? } | null shape.
  * No action name, platform key, or per-action branch lives here.
  */
@@ -247,7 +247,7 @@
      *   perItem         async (item, index) => row | row[] | null
      *   onItemError     async (e, item, index) =>
      *                     { rows?: row|row[], action?: "continue"|"break"|"throw" }
-     *                     (never called for AbortError â€” the runner intercepts it)
+     *                     (never called for AbortError — the runner intercepts it)
      *   onAbort         async (remainingItems) => row | row[] | null
      *                     called with the current + remaining items once the run
      *                     is stopped (nothing is persisted for them otherwise);

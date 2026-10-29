@@ -11,8 +11,8 @@
  * from eu.kobotoolbox.org to kc-eu.kobotoolbox.org fails with a CORS error and
  * a 401, proving the endpoint is reachable but not CORS-enabled. A service
  * worker with host_permissions is not bound by CORS, so it is the only way to
- * POST submissions to the other account's server. See
- * docs/cross-account-transfer-plan.md §2.
+ * POST submissions to the other account's server. See the README section
+ * "Move projects to another account".
  *
  * SCOPE — this worker handles DESTINATION traffic only. Source-account requests
  * stay in the content script and use the ordinary session client (KE.apiClient),
@@ -178,7 +178,11 @@
      */
     async function runWithRetry(spec) {
         const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+        let timedOut = false;
+        const timer = setTimeout(() => {
+            timedOut = true;
+            controller.abort();
+        }, REQUEST_TIMEOUT_MS);
         const relay = () => controller.abort();
         if (spec.externalSignal.aborted)
             controller.abort();
@@ -231,9 +235,18 @@
                 }
                 else {
                     const err = (failure || {});
-                    // A cancelled or timed-out request is never retried.
-                    if (err.name === "AbortError")
+                    // A cancelled or timed-out request is never retried. They are
+                    // reported differently: only a caller abort is "cancelled", while
+                    // the worker's own 120 s deadline is a timeout the user did not
+                    // cause (and the content-script client waits longer than this).
+                    if (err.name === "AbortError") {
+                        if (timedOut) {
+                            const timeout = new Error(`The request timed out after ${Math.round(REQUEST_TIMEOUT_MS / 1000)} s. The destination may be slow or unreachable.`);
+                            timeout.name = "KoboEnhanceTimeout";
+                            throw timeout;
+                        }
                         throw failure;
+                    }
                     // A refused URL is permanent: retrying would be refused again.
                     if (err.name === "KoboEnhanceBlockedUrl")
                         throw failure;

@@ -75,7 +75,7 @@
     const projectName = (source.name || (source.settings && source.settings.name) || "") as string;
 
     // Deployed versions only, exactly as the reference reads them
-    // (C:\src\kobo-transfer\transfer\asset.py:19 — `deployed_versions['results']`,
+    // (transfer/asset.py:19 — `deployed_versions['results']`,
     // passed straight to `deploy_all_versions`). Nothing in the reference touches
     // a versions collection or copies an unpublished draft, so a destination
     // copied this way has as many versions as the source has DEPLOYED ones. A
@@ -121,7 +121,7 @@
 
       // Each version is WRITTEN and then DEPLOYED before the next one is written,
       // exactly as the reference does
-      // (C:\src\kobo-transfer\transfer\asset.py:52-81):
+      // (transfer/asset.py:52-81):
       //
       //     for i, dp in enumerate(reversed(deployed_versions)):
       //         PATCH content ; version_id = res.json()['version_id']

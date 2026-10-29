@@ -1,7 +1,7 @@
 # Chrome Web Store submission pack
 
-Everything the dashboard asks for, drafted from the code. Replace the
-`<…>` and `{{…}}` placeholders and delete this paragraph before uploading.
+Everything the dashboard asks for, drafted from the code. Replace the remaining
+`<…>` placeholders and delete this paragraph before uploading.
 
 ## Before the first upload
 
@@ -31,7 +31,7 @@ The policy must be at a stable public HTTPS URL. Two workable options:
    `docs/privacy-policy.md` converted to HTML or a small `site/` folder.
 
 Do **not** enable GitHub Pages from the extension repo's `/docs` folder unless
-you are happy publishing `docs/production-readiness-plan.md` and this file too.
+you are happy publishing this submission pack too.
 
 Suggested URLs to record here once live:
 

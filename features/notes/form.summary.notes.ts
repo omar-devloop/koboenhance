@@ -367,7 +367,7 @@
   }
 
   window.addEventListener("message", (event) => {
-    if (event.source !== window) return;
+    if (event.source !== window || event.origin !== window.location.origin) return;
     const d = event.data;
     if (d && d.channel === "__koboenhance__" && d.type === "asset-detail") {
       if (!d.uid) return;

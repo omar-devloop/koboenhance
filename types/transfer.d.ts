@@ -10,8 +10,8 @@
  * The service worker exists because Kobo sends no Access-Control-Allow-Origin on
  * the KC host, so a cross-origin POST of submission XML from the page (or from an
  * MV3 content script) is impossible. A background service worker with
- * host_permissions is not bound by CORS. Verified 2026-09-30; see
- * docs/cross-account-transfer-plan.md §2.
+ * host_permissions is not bound by CORS. Verified 2026-09-30; see the README
+ * section "Move projects to another account".
  */
 
 // ---------------------------------------------------------------------
@@ -367,7 +367,7 @@ interface TransferSourceVersion extends KoboRecord {
  *
  * It is JSON-encoded EXACTLY ONCE, at the destination, because that is what the
  * API expects: the reference tool does `json={"content": json.dumps(value)}`
- * (C:\src\kobo-transfer\transfer\asset.py:59,66) and works for both shapes.
+ * (transfer/asset.py:59,66) and works for both shapes.
  * Encoding earlier — or encoding a value that is already a JSON string — produces
  * a doubly-encoded body and a silently empty form on the destination.
  */

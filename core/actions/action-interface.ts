@@ -1,4 +1,4 @@
-﻿/**
+/**
  * core/actions/action-interface.ts — the ACTION contract.
  *
  * Every KoboEnhance action — the 11 project-modification (bulk) actions and the

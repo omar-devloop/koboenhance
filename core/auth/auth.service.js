@@ -46,7 +46,7 @@
         return m && isValidUsername(m[1]) ? m[1] : "";
     }
     window.addEventListener("message", function (e) {
-        if (e.source !== window)
+        if (e.source !== window || e.origin !== window.location.origin)
             return;
         const d = e.data;
         if (!d)
@@ -176,11 +176,6 @@
     async function getUsername() {
         if (cachedUsername !== null)
             return cachedUsername;
-        const injected = window.__ke_username || "";
-        if (isValidUsername(injected)) {
-            cachedUsername = injected;
-            return cachedUsername;
-        }
         // Resolve quickly (cache/DOM/inject sources first); never block the caller
         // on the slow network path for more than ~1.5s.
         const budget = new Promise((resolve) => setTimeout(() => resolve(""), 1500));

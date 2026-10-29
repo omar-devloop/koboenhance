@@ -5,8 +5,8 @@
  * currently browsing with (search, ordering, collection, etc.) and use it
  * to paginate through matching projects for the "Import via Filters" feature.
  *
- * Also captures the signed-in username from Kobo's own API responses
- * and exposes it via a global variable for the content script.
+ * Also captures the signed-in username from Kobo's own API responses and
+ * forwards it to the isolated-world content script over postMessage.
  */
 (function () {
   const CHANNEL = "__koboenhance__";
@@ -14,8 +14,6 @@
   const ASSET_DETAIL_RE = /\/api\/v2\/assets\/([a-zA-Z0-9]+)\/$/;
   const USER_RE = /\/api\/v2\/users\/?(\?|$)/;
   const ME_RE = /\/me\/(\?|$)/;
-
-  window.__ke_username = window.__ke_username || null;
 
   function report(url: string): void {
     try {
@@ -26,14 +24,6 @@
           { channel: CHANNEL, type: "asset-list-request", url: u.toString() },
           window.location.origin
         );
-        // The asset-list filter carries the signed-in user when browsing
-        // "my projects" (q=owner__username=me). Store it for instant,
-        // network-free username resolution in download filenames.
-        if (!window.__ke_username) {
-          const q = u.searchParams.get("q") || "";
-          const m = q.match(/(?:^|[(\s,])owner__username\s*(?:=|%3[Dd]|:)\s*([^)\s&,%]+)/);
-          if (m && m[1]) window.__ke_username = m[1];
-        }
       }
     } catch (e) {
       /* ignore malformed URLs */
@@ -43,7 +33,6 @@
   function extractUsername(body: unknown): void {
     if (!body || typeof body !== "object") return;
     if ((body as Record<string, unknown>).username && typeof (body as Record<string, unknown>).username === "string" && (body as Record<string, unknown>).username !== "me") {
-      window.__ke_username = (body as Record<string, unknown>).username as string;
       postUsername((body as Record<string, unknown>).username as string, "me");
     }
   }
